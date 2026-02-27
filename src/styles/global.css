@@ -40,7 +40,7 @@
 
   --color-text: #e2e8f0;
   --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  --color-text-muted: #7c8da2;
 
   --color-accent: #06b6d4;
   --color-accent-dim: #0891b2;
@@ -263,6 +263,13 @@ html {
 .toc-active {
   color: var(--color-accent) !important;
   background-color: rgba(6, 182, 212, 0.06);
+}
+
+/* ===== Focus visible ===== */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* ===== Reduced motion ===== */
