@@ -19,3 +19,213 @@
   --color-terminal-text: #cccccc;
   --color-terminal-text-dim: #666666;
 }
+
+/* === Terminal Prose Styles === */
+
+/* Hide the duplicate H1 from markdown (page already has its own header) */
+.prose-terminal > h1 {
+  display: none;
+}
+
+/* Also hide the first subtitle, edition badge, and first hr since they're in the page header */
+.prose-terminal > p:first-of-type,
+.prose-terminal > p:nth-of-type(2),
+.prose-terminal > hr:first-of-type {
+  display: none;
+}
+
+/* Headings */
+.prose-terminal h2 {
+  color: var(--color-terminal-green);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--color-terminal-border);
+  scroll-margin-top: 2rem;
+}
+
+.prose-terminal h3 {
+  color: var(--color-terminal-amber);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Tables */
+.prose-terminal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose-terminal thead {
+  display: none;
+}
+
+.prose-terminal td,
+.prose-terminal th {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-terminal-border);
+  vertical-align: top;
+}
+
+.prose-terminal td:first-child {
+  color: var(--color-terminal-green);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.prose-terminal tr:nth-child(even) {
+  background-color: var(--color-terminal-surface);
+}
+
+.prose-terminal tr:hover {
+  background-color: rgba(0, 255, 65, 0.03);
+}
+
+/* Inline code */
+.prose-terminal code {
+  color: var(--color-terminal-green);
+  background-color: var(--color-terminal-surface);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  border: 1px solid var(--color-terminal-border);
+}
+
+/* Code blocks */
+.prose-terminal pre {
+  background-color: var(--color-terminal-surface);
+  border: 1px solid var(--color-terminal-border);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  position: relative;
+}
+
+.prose-terminal pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-terminal-text);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Links */
+.prose-terminal a {
+  color: var(--color-terminal-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.prose-terminal a:hover {
+  border-bottom-color: var(--color-terminal-green);
+}
+
+/* Blockquotes (tips, warnings) */
+.prose-terminal blockquote {
+  border-left: 3px solid var(--color-terminal-green);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background-color: rgba(0, 255, 65, 0.03);
+  border-radius: 0 0.25rem 0.25rem 0;
+  font-size: 0.8125rem;
+}
+
+.prose-terminal blockquote p {
+  margin: 0;
+  color: var(--color-terminal-text-dim);
+}
+
+/* Horizontal rules */
+.prose-terminal hr {
+  border: none;
+  border-top: 1px dashed var(--color-terminal-border);
+  margin: 2rem 0;
+}
+
+/* Strong and emphasis */
+.prose-terminal strong {
+  color: var(--color-terminal-text);
+  font-weight: 600;
+}
+
+.prose-terminal em {
+  color: var(--color-terminal-text-dim);
+  font-style: italic;
+}
+
+/* Lists */
+.prose-terminal ul,
+.prose-terminal ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.prose-terminal li {
+  margin-bottom: 0.25rem;
+  color: var(--color-terminal-text);
+}
+
+.prose-terminal li::marker {
+  color: var(--color-terminal-green-dim);
+}
+
+/* Paragraphs */
+.prose-terminal p {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* CRT scanline effect */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terminal-text-dim);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(0, 255, 65, 0.2);
+  color: var(--color-terminal-green);
+}
