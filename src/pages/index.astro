@@ -1,6 +1,69 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('sheet', 'cheat-sheet');
+if (!entry) throw new Error('Cheat sheet content not found');
+const { Content, headings } = await render(entry);
 ---
-<html>
-  <head><title>clawd</title></head>
-  <body><h1>clawd</h1></body>
-</html>
+
+<Layout
+  title="clawd — Claude Code Cheat Sheet"
+  description="Everything you need in one place — Commands, Shortcuts, Features & Tips for Claude Code"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <header class="py-8 sm:py-12 border-b border-terminal-border">
+      <div class="flex items-center gap-2 text-terminal-green text-sm mb-4">
+        <span class="text-terminal-text-dim">$</span>
+        <span>clawd</span>
+        <span class="animate-pulse">▊</span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-bold text-terminal-green tracking-tight">
+        Claude Code Cheat Sheet
+      </h1>
+      <p class="text-terminal-text-dim mt-2 text-sm sm:text-base">
+        Everything you need in one place — Commands, Shortcuts, Features &amp; Tips
+      </p>
+      <span class="inline-block mt-3 px-2 py-0.5 text-xs border border-terminal-green/30 text-terminal-green rounded">
+        2026 EDITION
+      </span>
+    </header>
+
+    <!-- Main content area with sidebar -->
+    <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8 py-8">
+      <!-- TOC Sidebar -->
+      <aside id="toc-sidebar" class="hidden lg:block">
+        <nav class="sticky top-8">
+          <h2 class="text-xs uppercase tracking-wider text-terminal-text-dim mb-4">Contents</h2>
+          <ul class="space-y-1 text-sm">
+            {headings.filter((h) => h.depth === 2).map((heading) => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class="block py-1 text-terminal-text-dim hover:text-terminal-green transition-colors truncate"
+                  data-toc-link
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Rendered markdown content -->
+      <main id="sheet-content" class="prose-terminal min-w-0">
+        <Content />
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-terminal-border py-6 text-center text-xs text-terminal-text-dim">
+      <p>
+        Built with <a href="https://astro.build" class="text-terminal-green hover:underline">Astro</a>
+        · Source on <a href="https://github.com/patricio0312rev/claude-sheet" class="text-terminal-green hover:underline">GitHub</a>
+      </p>
+    </footer>
+  </div>
+</Layout>
