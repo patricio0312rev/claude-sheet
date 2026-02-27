@@ -69,32 +69,45 @@ export default function Search() {
   }, []);
 
   return (
-    <div className="relative mt-6 mb-2">
+    <div className="relative mb-8">
       <div
-        className="flex items-center gap-2 rounded border px-3 py-2 text-sm transition-colors focus-within:border-[var(--color-terminal-green)]"
+        className="flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm transition-all duration-200"
         style={{
-          backgroundColor: 'var(--color-terminal-surface)',
-          borderColor: 'var(--color-terminal-border)',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
         }}
       >
-        <span style={{ color: 'var(--color-terminal-text-dim)' }}>$</span>
-        <span style={{ color: 'var(--color-terminal-green)' }}>search:</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-text-muted)', flexShrink: 0 }}>
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
         <input
           ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search cheat sheet sections"
-          placeholder="type to filter sections... (press /)"
+          placeholder="Search commands, shortcuts..."
           className="flex-1 bg-transparent outline-none text-sm"
-          style={{ color: 'var(--color-terminal-text)' }}
+          style={{ color: 'var(--color-text)' }}
           spellCheck={false}
           autoComplete="off"
         />
-        {matchCount !== null && (
-          <span className="text-xs" style={{ color: 'var(--color-terminal-text-dim)' }}>
-            {matchCount} section{matchCount !== 1 ? 's' : ''}
+        {matchCount !== null ? (
+          <span className="text-xs tabular-nums" style={{ color: 'var(--color-text-muted)' }}>
+            {matchCount} match{matchCount !== 1 ? 'es' : ''}
           </span>
+        ) : (
+          <kbd
+            className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[0.625rem] rounded"
+            style={{
+              backgroundColor: 'var(--color-surface-elevated)',
+              color: 'var(--color-text-muted)',
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            /
+          </kbd>
         )}
       </div>
     </div>
