@@ -2,9 +2,11 @@
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  canonicalUrl?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage, canonicalUrl } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +17,24 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />
+    <meta property="og:image" content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'} />
+    <meta property="og:site_name" content="clawd" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'} />
+
+    <!-- Canonical & Theme -->
+    <link rel="canonical" href={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />
+    <meta name="theme-color" content="#0a0a0a" />
   </head>
   <body class="font-mono text-terminal-text min-h-screen">
     <slot />
