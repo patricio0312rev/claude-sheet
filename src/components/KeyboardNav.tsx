@@ -59,13 +59,40 @@ export default function KeyboardNav() {
       }}
     >
       <span className="flex items-center gap-1">
-        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>j</kbd>
-        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>k</kbd>
+        <kbd
+          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
+          style={{
+            backgroundColor: 'var(--color-surface-elevated)',
+            color: 'var(--color-accent)',
+            border: '1px solid var(--color-border)',
+          }}
+        >
+          j
+        </kbd>
+        <kbd
+          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
+          style={{
+            backgroundColor: 'var(--color-surface-elevated)',
+            color: 'var(--color-accent)',
+            border: '1px solid var(--color-border)',
+          }}
+        >
+          k
+        </kbd>
         <span className="ml-0.5">navigate</span>
       </span>
       <span style={{ color: 'var(--color-border-bright)' }}>·</span>
       <span className="flex items-center gap-1">
-        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>/</kbd>
+        <kbd
+          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
+          style={{
+            backgroundColor: 'var(--color-surface-elevated)',
+            color: 'var(--color-accent)',
+            border: '1px solid var(--color-border)',
+          }}
+        >
+          /
+        </kbd>
         <span className="ml-0.5">search</span>
       </span>
     </div>

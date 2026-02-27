@@ -51,7 +51,16 @@ export default function MobileToc({ headings }: MobileTocProps) {
         type="button"
         aria-label="Open table of contents"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="18" x2="15" y2="18" />
@@ -67,7 +76,10 @@ export default function MobileToc({ headings }: MobileTocProps) {
           aria-modal="true"
           aria-label="Table of contents"
         >
-          <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          <div
+            className="flex items-center justify-between px-5 py-4 border-b"
+            style={{ borderColor: 'var(--color-border)' }}
+          >
             <h2 className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
               On this page
             </h2>
@@ -82,7 +94,16 @@ export default function MobileToc({ headings }: MobileTocProps) {
               type="button"
               aria-label="Close table of contents"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>

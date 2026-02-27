@@ -5,7 +5,8 @@
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
-  src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2') format('woff2');
+  src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -13,7 +14,8 @@
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
-  src: url('https://fonts.gstatic.com/s/ibmplexsans/v19/zYXgKVElMYYaJe8bpLHnCwDKtdbUFI5NadY.woff2') format('woff2');
+  src: url('https://fonts.gstatic.com/s/ibmplexsans/v19/zYXgKVElMYYaJe8bpLHnCwDKtdbUFI5NadY.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -21,7 +23,8 @@
   font-style: normal;
   font-weight: 400 600;
   font-display: swap;
-  src: url('https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n5igg1l9kn-s.woff2') format('woff2');
+  src: url('https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n5igg1l9kn-s.woff2')
+    format('woff2');
 }
 
 @theme {
@@ -29,20 +32,20 @@
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
-  --color-bg: #060A13;
-  --color-surface: #0D1420;
-  --color-surface-elevated: #141E2E;
-  --color-border: #1E2D3D;
-  --color-border-bright: #2A3F55;
+  --color-bg: #060a13;
+  --color-surface: #0d1420;
+  --color-surface-elevated: #141e2e;
+  --color-border: #1e2d3d;
+  --color-border-bright: #2a3f55;
 
-  --color-text: #E2E8F0;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #64748B;
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
 
-  --color-accent: #06B6D4;
-  --color-accent-dim: #0891B2;
-  --color-amber: #F59E0B;
-  --color-green: #10B981;
+  --color-accent: #06b6d4;
+  --color-accent-dim: #0891b2;
+  --color-amber: #f59e0b;
+  --color-green: #10b981;
 }
 
 /* ===== Smooth scrolling ===== */

@@ -21,20 +21,30 @@ const tocHeadings = headings
 >
   <!-- Ambient background glow -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-[40%] -left-[20%] w-[60%] h-[60%] rounded-full bg-accent/[0.03] blur-[120px]"></div>
-    <div class="absolute -bottom-[30%] -right-[10%] w-[50%] h-[50%] rounded-full bg-amber/[0.02] blur-[100px]"></div>
+    <div
+      class="absolute -top-[40%] -left-[20%] w-[60%] h-[60%] rounded-full bg-accent/[0.03] blur-[120px]"
+    >
+    </div>
+    <div
+      class="absolute -bottom-[30%] -right-[10%] w-[50%] h-[50%] rounded-full bg-amber/[0.02] blur-[100px]"
+    >
+    </div>
   </div>
 
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <header class="pt-12 sm:pt-16 pb-8">
       <div class="flex items-center gap-3 mb-6">
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-text-muted">
+        <div
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-text-muted"
+        >
           <span class="w-2 h-2 rounded-full bg-green animate-pulse"></span>
           v2026
         </div>
       </div>
-      <h1 class="font-heading text-3xl sm:text-5xl font-bold text-text tracking-tight leading-[1.1]">
+      <h1
+        class="font-heading text-3xl sm:text-5xl font-bold text-text tracking-tight leading-[1.1]"
+      >
         Claude Code<br />
         <span class="text-accent">Cheat Sheet</span>
       </h1>
@@ -54,17 +64,21 @@ const tocHeadings = headings
             On this page
           </h2>
           <ul class="space-y-0.5 text-[0.8125rem]">
-            {headings.filter((h) => h.depth === 2).map((heading) => (
-              <li>
-                <a
-                  href={`#${heading.slug}`}
-                  class="block py-1.5 px-3 rounded-md text-text-muted hover:text-text hover:bg-surface transition-all duration-150 truncate cursor-pointer"
-                  data-toc-link
-                >
-                  {heading.text}
-                </a>
-              </li>
-            ))}
+            {
+              headings
+                .filter((h) => h.depth === 2)
+                .map((heading) => (
+                  <li>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="block py-1.5 px-3 rounded-md text-text-muted hover:text-text hover:bg-surface transition-all duration-150 truncate cursor-pointer"
+                      data-toc-link
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))
+            }
           </ul>
         </nav>
       </aside>
@@ -84,10 +98,16 @@ const tocHeadings = headings
     <footer class="border-t border-border py-8 text-center">
       <p class="text-sm text-text-muted">
         Built with
-        <a href="https://astro.build" class="text-text-secondary hover:text-accent transition-colors cursor-pointer">Astro</a>
+        <a
+          href="https://astro.build"
+          class="text-text-secondary hover:text-accent transition-colors cursor-pointer">Astro</a
+        >
         <span class="mx-1.5 text-border-bright">·</span>
         Source on
-        <a href="https://github.com/patricio0312rev/claude-sheet" class="text-text-secondary hover:text-accent transition-colors cursor-pointer">GitHub</a>
+        <a
+          href="https://github.com/patricio0312rev/claude-sheet"
+          class="text-text-secondary hover:text-accent transition-colors cursor-pointer">GitHub</a
+        >
       </p>
     </footer>
   </div>
