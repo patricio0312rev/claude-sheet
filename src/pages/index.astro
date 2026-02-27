@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
+import CopyButtons from '../components/CopyButtons';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
@@ -56,6 +57,7 @@ const { Content, headings } = await render(entry);
       <main id="sheet-content" class="prose-terminal min-w-0">
         <Content />
       </main>
+      <CopyButtons client:load />
     </div>
 
     <!-- Footer -->
