@@ -4,11 +4,13 @@ import { getEntry, render } from 'astro:content';
 import CopyButtons from '../components/CopyButtons';
 import KeyboardNav from '../components/KeyboardNav';
 import ScrollSpy from '../components/ScrollSpy';
+import MobileToc from '../components/MobileToc';
 import Search from '../components/Search';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
 const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
 ---
 
 <Layout
@@ -66,6 +68,8 @@ const { Content, headings } = await render(entry);
       <KeyboardNav client:load />
       <ScrollSpy client:load />
     </div>
+
+    <MobileToc headings={tocHeadings} client:load />
 
     <!-- Footer -->
     <footer class="border-t border-terminal-border py-6 text-center text-xs text-terminal-text-dim">
