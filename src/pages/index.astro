@@ -19,57 +19,58 @@ const tocHeadings = headings
   title="clawd — Claude Code Cheat Sheet"
   description="Everything you need in one place — Commands, Shortcuts, Features & Tips for Claude Code"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Ambient background glow -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-[40%] -left-[20%] w-[60%] h-[60%] rounded-full bg-accent/[0.03] blur-[120px]"></div>
+    <div class="absolute -bottom-[30%] -right-[10%] w-[50%] h-[50%] rounded-full bg-amber/[0.02] blur-[100px]"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <header class="py-8 sm:py-12 border-b border-terminal-border">
-      <div class="flex items-center gap-2 text-terminal-green text-sm mb-4">
-        <span class="text-terminal-text-dim">$</span>
-        <span>clawd</span>
-        <span class="animate-pulse">▊</span>
+    <header class="pt-12 sm:pt-16 pb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-text-muted">
+          <span class="w-2 h-2 rounded-full bg-green animate-pulse"></span>
+          v2026
+        </div>
       </div>
-      <h1 class="text-2xl sm:text-4xl font-bold text-terminal-green tracking-tight">
-        Claude Code Cheat Sheet
+      <h1 class="font-heading text-3xl sm:text-5xl font-bold text-text tracking-tight leading-[1.1]">
+        Claude Code<br />
+        <span class="text-accent">Cheat Sheet</span>
       </h1>
-      <p class="text-terminal-text-dim mt-2 text-sm sm:text-base">
-        Everything you need in one place — Commands, Shortcuts, Features &amp; Tips
+      <p class="text-text-secondary mt-4 text-base sm:text-lg max-w-xl leading-relaxed">
+        Commands, shortcuts, features & tips — everything you need in one place.
       </p>
-      <span
-        class="inline-block mt-3 px-2 py-0.5 text-xs border border-terminal-green/30 text-terminal-green rounded"
-      >
-        2026 EDITION
-      </span>
     </header>
 
     <Search client:load />
 
     <!-- Main content area with sidebar -->
-    <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8 py-8">
+    <div class="lg:grid lg:grid-cols-[220px_1fr] lg:gap-12 pb-12">
       <!-- TOC Sidebar -->
       <aside id="toc-sidebar" class="hidden lg:block">
         <nav class="sticky top-8">
-          <h2 class="text-xs uppercase tracking-wider text-terminal-text-dim mb-4">Contents</h2>
-          <ul class="space-y-1 text-sm">
-            {
-              headings
-                .filter((h) => h.depth === 2)
-                .map((heading) => (
-                  <li>
-                    <a
-                      href={`#${heading.slug}`}
-                      class="block py-1 text-terminal-text-dim hover:text-terminal-green transition-colors truncate"
-                      data-toc-link
-                    >
-                      {heading.text}
-                    </a>
-                  </li>
-                ))
-            }
+          <h2 class="text-[0.6875rem] uppercase tracking-[0.15em] text-text-muted mb-4 font-medium">
+            On this page
+          </h2>
+          <ul class="space-y-0.5 text-[0.8125rem]">
+            {headings.filter((h) => h.depth === 2).map((heading) => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class="block py-1.5 px-3 rounded-md text-text-muted hover:text-text hover:bg-surface transition-all duration-150 truncate cursor-pointer"
+                  data-toc-link
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       </aside>
 
       <!-- Rendered markdown content -->
-      <main id="sheet-content" class="prose-terminal min-w-0">
+      <main id="sheet-content" class="prose min-w-0">
         <Content />
       </main>
       <CopyButtons client:load />
@@ -80,15 +81,13 @@ const tocHeadings = headings
     <MobileToc headings={tocHeadings} client:load />
 
     <!-- Footer -->
-    <footer class="border-t border-terminal-border py-6 text-center text-xs text-terminal-text-dim">
-      <p>
-        Built with <a href="https://astro.build" class="text-terminal-green hover:underline"
-          >Astro</a
-        >
-        · Source on <a
-          href="https://github.com/patricio0312rev/claude-sheet"
-          class="text-terminal-green hover:underline">GitHub</a
-        >
+    <footer class="border-t border-border py-8 text-center">
+      <p class="text-sm text-text-muted">
+        Built with
+        <a href="https://astro.build" class="text-text-secondary hover:text-accent transition-colors cursor-pointer">Astro</a>
+        <span class="mx-1.5 text-border-bright">·</span>
+        Source on
+        <a href="https://github.com/patricio0312rev/claude-sheet" class="text-text-secondary hover:text-accent transition-colors cursor-pointer">GitHub</a>
       </p>
     </footer>
   </div>
