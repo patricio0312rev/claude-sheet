@@ -4,6 +4,8 @@ _Everything you need in one place — Commands, Shortcuts, Features & Tips_
 
 `2026 EDITION`
 
+> 📖 **Full docs:** [code.claude.com/docs/llms.txt](https://code.claude.com/docs/llms.txt) — complete documentation index
+
 ---
 
 ## ⌨️ Keyboard Shortcuts
@@ -384,6 +386,69 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 Use `$ARGUMENTS` in your markdown — it gets replaced with whatever you type after the command.
 
 > 💡 **Example:** `/project:review src/auth.ts` → `$ARGUMENTS` = "src/auth.ts"
+
+---
+
+## 📡 Remote Control — Continue Sessions From Any Device
+
+Control your local Claude Code session from your phone, tablet, or any browser. Your session runs locally — the remote device is just a window into it.
+
+### Requirements
+
+| Requirement      | Details                                              |
+| ---------------- | ---------------------------------------------------- |
+| **Subscription** | Max plan required (Pro coming soon). No API keys.    |
+| **Auth**         | Run `claude` → `/login` to sign in via claude.ai     |
+| **Trust**        | Run `claude` in your project dir once to accept trust |
+
+### Starting a Remote Session
+
+| Method                  | Command / Action                                          |
+| ----------------------- | --------------------------------------------------------- |
+| **New session**         | `claude remote-control`                                   |
+| **From existing**       | Type `/remote-control` or `/rc` inside a session          |
+| **Enable for all**      | `/config` → Enable Remote Control for all sessions → true |
+
+### Connecting From Another Device
+
+| Method          | How                                                           |
+| --------------- | ------------------------------------------------------------- |
+| **Session URL** | Shown in terminal — open in any browser                       |
+| **QR code**     | Press `spacebar` to toggle QR display, scan with phone        |
+| **Session list** | Open claude.ai/code or Claude app — find by name (🟢 = online) |
+
+### Launch Flags
+
+| Flag             | Action                                  |
+| ---------------- | --------------------------------------- |
+| `--verbose`      | Show detailed connection & session logs |
+| `--sandbox`      | Enable filesystem & network isolation   |
+| `--no-sandbox`   | Disable sandboxing (default)            |
+
+### How It Works
+
+- Your local session makes **outbound HTTPS only** — no inbound ports opened
+- All traffic routes through Anthropic API over TLS
+- Session reconnects automatically after sleep or network drops
+- One remote connection per Claude Code instance
+
+### Remote Control vs Claude Code on the Web
+
+| Feature           | Remote Control                  | Claude Code on the Web            |
+| ----------------- | ------------------------------- | --------------------------------- |
+| **Runs on**       | Your machine                    | Anthropic cloud infrastructure    |
+| **Local tools**   | ✅ MCP, filesystem, project config | ❌ Cloud environment only          |
+| **Best for**      | Continue local work from anywhere | Start fresh without local setup   |
+
+### Limitations
+
+| Limitation              | Details                                                              |
+| ----------------------- | -------------------------------------------------------------------- |
+| One session at a time   | Each Claude Code instance supports one remote connection             |
+| Terminal must stay open  | Closing the terminal or stopping `claude` ends the session           |
+| Network timeout         | ~10 min without network → session times out (restart with `claude remote-control`) |
+
+> 💡 **Tip:** Use `/rename` before `/remote-control` to give the session a descriptive name — makes it easy to find across devices. Use `/mobile` to get the Claude app download QR code.
 
 ---
 
