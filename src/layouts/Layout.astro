@@ -13,7 +13,7 @@ const resolvedOgImage = ogImage || `${siteUrl}/og-image.svg`;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-terminal-bg">
+<html lang="en" class="bg-bg">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,31 +21,22 @@ const resolvedOgImage = ogImage || `${siteUrl}/og-image.svg`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={resolvedCanonical} />
-    <meta
-      property="og:image"
-      content={resolvedOgImage}
-    />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:site_name" content="clawd" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content={resolvedOgImage}
-    />
+    <meta name="twitter:image" content={resolvedOgImage} />
 
-    <!-- Canonical & Theme -->
     <link rel="canonical" href={resolvedCanonical} />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#060A13" />
   </head>
-  <body class="font-mono text-terminal-text min-h-screen">
+  <body class="font-body text-text min-h-screen antialiased">
     <slot />
   </body>
 </html>
