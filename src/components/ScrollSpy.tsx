@@ -2,9 +2,7 @@ import { useEffect } from 'react';
 
 export default function ScrollSpy() {
   useEffect(() => {
-    const headings = Array.from(
-      document.querySelectorAll<HTMLElement>('#sheet-content h2')
-    );
+    const headings = Array.from(document.querySelectorAll<HTMLElement>('#sheet-content h2'));
     const tocLinks = Array.from(document.querySelectorAll('[data-toc-link]'));
 
     if (headings.length === 0 || tocLinks.length === 0) return;
@@ -56,7 +54,11 @@ export default function ScrollSpy() {
 
     const content = document.getElementById('sheet-content');
     if (content) {
-      mutationObserver.observe(content, { attributes: true, subtree: true, attributeFilter: ['style'] });
+      mutationObserver.observe(content, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ['style'],
+      });
     }
 
     return () => {

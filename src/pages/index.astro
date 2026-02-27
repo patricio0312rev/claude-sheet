@@ -10,7 +10,9 @@ import Search from '../components/Search';
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
 const { Content, headings } = await render(entry);
-const tocHeadings = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
+const tocHeadings = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ slug: h.slug, text: h.text }));
 ---
 
 <Layout
@@ -31,7 +33,9 @@ const tocHeadings = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.
       <p class="text-terminal-text-dim mt-2 text-sm sm:text-base">
         Everything you need in one place — Commands, Shortcuts, Features &amp; Tips
       </p>
-      <span class="inline-block mt-3 px-2 py-0.5 text-xs border border-terminal-green/30 text-terminal-green rounded">
+      <span
+        class="inline-block mt-3 px-2 py-0.5 text-xs border border-terminal-green/30 text-terminal-green rounded"
+      >
         2026 EDITION
       </span>
     </header>
@@ -45,17 +49,21 @@ const tocHeadings = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.
         <nav class="sticky top-8">
           <h2 class="text-xs uppercase tracking-wider text-terminal-text-dim mb-4">Contents</h2>
           <ul class="space-y-1 text-sm">
-            {headings.filter((h) => h.depth === 2).map((heading) => (
-              <li>
-                <a
-                  href={`#${heading.slug}`}
-                  class="block py-1 text-terminal-text-dim hover:text-terminal-green transition-colors truncate"
-                  data-toc-link
-                >
-                  {heading.text}
-                </a>
-              </li>
-            ))}
+            {
+              headings
+                .filter((h) => h.depth === 2)
+                .map((heading) => (
+                  <li>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="block py-1 text-terminal-text-dim hover:text-terminal-green transition-colors truncate"
+                      data-toc-link
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))
+            }
           </ul>
         </nav>
       </aside>
@@ -74,8 +82,13 @@ const tocHeadings = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.
     <!-- Footer -->
     <footer class="border-t border-terminal-border py-6 text-center text-xs text-terminal-text-dim">
       <p>
-        Built with <a href="https://astro.build" class="text-terminal-green hover:underline">Astro</a>
-        · Source on <a href="https://github.com/patricio0312rev/claude-sheet" class="text-terminal-green hover:underline">GitHub</a>
+        Built with <a href="https://astro.build" class="text-terminal-green hover:underline"
+          >Astro</a
+        >
+        · Source on <a
+          href="https://github.com/patricio0312rev/claude-sheet"
+          class="text-terminal-green hover:underline">GitHub</a
+        >
       </p>
     </footer>
   </div>

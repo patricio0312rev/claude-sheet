@@ -57,7 +57,14 @@ export default function MobileToc({ headings }: MobileTocProps) {
         type="button"
         aria-label="Open table of contents"
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <line x1="2" y1="4" x2="14" y2="4" />
           <line x1="2" y1="8" x2="14" y2="8" />
           <line x1="2" y1="12" x2="10" y2="12" />
@@ -74,8 +81,14 @@ export default function MobileToc({ headings }: MobileTocProps) {
           aria-modal="true"
           aria-label="Table of contents"
         >
-          <div className="flex items-center justify-between px-4 py-4 border-b" style={{ borderColor: 'var(--color-terminal-border)' }}>
-            <h2 className="text-sm uppercase tracking-wider" style={{ color: 'var(--color-terminal-text-dim)' }}>
+          <div
+            className="flex items-center justify-between px-4 py-4 border-b"
+            style={{ borderColor: 'var(--color-terminal-border)' }}
+          >
+            <h2
+              className="text-sm uppercase tracking-wider"
+              style={{ color: 'var(--color-terminal-text-dim)' }}
+            >
               Contents
             </h2>
             <button

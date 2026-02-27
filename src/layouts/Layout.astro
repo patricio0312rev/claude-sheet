@@ -23,14 +23,20 @@ const { title, description, ogImage, canonicalUrl } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />
-    <meta property="og:image" content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'} />
+    <meta
+      property="og:image"
+      content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'}
+    />
     <meta property="og:site_name" content="clawd" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'} />
+    <meta
+      name="twitter:image"
+      content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'}
+    />
 
     <!-- Canonical & Theme -->
     <link rel="canonical" href={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />

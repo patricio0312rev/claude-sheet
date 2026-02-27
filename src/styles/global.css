@@ -5,11 +5,14 @@
   font-style: normal;
   font-weight: 100 800;
   font-display: swap;
-  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v20/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmNZDlk.woff2') format('woff2');
+  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v20/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmNZDlk.woff2')
+    format('woff2');
 }
 
 @theme {
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
   --color-terminal-green: #00ff41;
   --color-terminal-green-dim: #00cc33;
   --color-terminal-amber: #ffb000;
