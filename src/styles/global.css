@@ -229,3 +229,10 @@ body::after {
   background-color: rgba(0, 255, 65, 0.2);
   color: var(--color-terminal-green);
 }
+
+/* Active TOC link */
+.toc-active {
+  color: var(--color-terminal-green) !important;
+  border-left: 2px solid var(--color-terminal-green);
+  padding-left: 0.5rem;
+}
