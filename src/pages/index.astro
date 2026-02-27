@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 import CopyButtons from '../components/CopyButtons';
+import KeyboardNav from '../components/KeyboardNav';
 import Search from '../components/Search';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
@@ -61,6 +62,7 @@ const { Content, headings } = await render(entry);
         <Content />
       </main>
       <CopyButtons client:load />
+      <KeyboardNav client:load />
     </div>
 
     <!-- Footer -->
