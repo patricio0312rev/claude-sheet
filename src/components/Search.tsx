@@ -54,7 +54,7 @@ export default function Search() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === '/' && !isInputFocused()) {
+      if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !isInputFocused()) {
         e.preventDefault();
         inputRef.current?.focus();
       }
@@ -84,6 +84,7 @@ export default function Search() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          aria-label="Search cheat sheet sections"
           placeholder="type to filter sections... (press /)"
           className="flex-1 bg-transparent outline-none text-sm"
           style={{ color: 'var(--color-terminal-text)' }}
