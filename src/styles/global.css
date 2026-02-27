@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v20/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmNZDlk.woff2') format('woff2');
+}
+
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --color-terminal-green: #00ff41;
+  --color-terminal-green-dim: #00cc33;
+  --color-terminal-amber: #ffb000;
+  --color-terminal-bg: #0a0a0a;
+  --color-terminal-surface: #111111;
+  --color-terminal-border: #1a1a1a;
+  --color-terminal-text: #cccccc;
+  --color-terminal-text-dim: #666666;
+}
