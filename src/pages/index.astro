@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 import CopyButtons from '../components/CopyButtons';
+import Search from '../components/Search';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
@@ -30,6 +31,8 @@ const { Content, headings } = await render(entry);
         2026 EDITION
       </span>
     </header>
+
+    <Search client:load />
 
     <!-- Main content area with sidebar -->
     <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8 py-8">
