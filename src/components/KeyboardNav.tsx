@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export default function KeyboardNav() {
   const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -35,58 +36,37 @@ export default function KeyboardNav() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Hide hint after 10 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 10000);
-    return () => clearTimeout(timer);
+    const fadeTimer = setTimeout(() => setFading(true), 7000);
+    const hideTimer = setTimeout(() => setVisible(false), 8000);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   if (!visible) return null;
 
   return (
     <div
-      className="fixed bottom-4 right-4 hidden lg:flex items-center gap-3 px-3 py-2 rounded text-xs z-50 transition-opacity"
+      className="fixed bottom-4 right-4 hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-lg text-xs backdrop-blur-md z-50"
       style={{
-        backgroundColor: 'var(--color-terminal-surface)',
-        borderColor: 'var(--color-terminal-border)',
-        border: '1px solid var(--color-terminal-border)',
-        color: 'var(--color-terminal-text-dim)',
+        backgroundColor: 'rgba(13, 20, 32, 0.85)',
+        border: '1px solid var(--color-border)',
+        color: 'var(--color-text-muted)',
+        opacity: fading ? 0 : 1,
+        transition: 'opacity 1s ease',
       }}
     >
-      <span>
-        <kbd
-          className="px-1 rounded"
-          style={{
-            backgroundColor: 'var(--color-terminal-bg)',
-            color: 'var(--color-terminal-green)',
-          }}
-        >
-          j
-        </kbd>
-        /
-        <kbd
-          className="px-1 rounded"
-          style={{
-            backgroundColor: 'var(--color-terminal-bg)',
-            color: 'var(--color-terminal-green)',
-          }}
-        >
-          k
-        </kbd>{' '}
-        navigate
+      <span className="flex items-center gap-1">
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>j</kbd>
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>k</kbd>
+        <span className="ml-0.5">navigate</span>
       </span>
-      <span>·</span>
-      <span>
-        <kbd
-          className="px-1 rounded"
-          style={{
-            backgroundColor: 'var(--color-terminal-bg)',
-            color: 'var(--color-terminal-green)',
-          }}
-        >
-          /
-        </kbd>{' '}
-        search
+      <span style={{ color: 'var(--color-border-bright)' }}>·</span>
+      <span className="flex items-center gap-1">
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono" style={{ backgroundColor: 'var(--color-surface-elevated)', color: 'var(--color-accent)', border: '1px solid var(--color-border)' }}>/</kbd>
+        <span className="ml-0.5">search</span>
       </span>
     </div>
   );
