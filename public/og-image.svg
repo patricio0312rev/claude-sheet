@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <text x="100" y="200" font-family="monospace" font-size="24" fill="#666666">$ clawd</text>
+  <text x="100" y="300" font-family="monospace" font-size="64" fill="#00ff41" font-weight="bold">Claude Code</text>
+  <text x="100" y="370" font-family="monospace" font-size="64" fill="#00ff41" font-weight="bold">Cheat Sheet</text>
+  <text x="100" y="450" font-family="monospace" font-size="24" fill="#cccccc">Everything you need in one place</text>
+  <text x="100" y="530" font-family="monospace" font-size="20" fill="#666666">clawd.patriciomarroquin.dev</text>
+  <rect x="96" y="510" width="4" height="30" fill="#00ff41">
+    <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
+</svg>
