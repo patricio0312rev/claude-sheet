@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface TocHeading {
   slug: string;
@@ -11,6 +11,27 @@ interface MobileTocProps {
 
 export default function MobileToc({ headings }: MobileTocProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Lock body scroll and handle Escape key when open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleLinkClick = (slug: string) => {
     setIsOpen(false);
@@ -46,12 +67,19 @@ export default function MobileToc({ headings }: MobileTocProps) {
 
       {/* Full-screen overlay */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-terminal-bg)' }}>
+        <div
+          className="lg:hidden fixed inset-0 z-50 flex flex-col"
+          style={{ backgroundColor: 'var(--color-terminal-bg)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Table of contents"
+        >
           <div className="flex items-center justify-between px-4 py-4 border-b" style={{ borderColor: 'var(--color-terminal-border)' }}>
             <h2 className="text-sm uppercase tracking-wider" style={{ color: 'var(--color-terminal-text-dim)' }}>
               Contents
             </h2>
             <button
+              ref={closeButtonRef}
               onClick={() => setIsOpen(false)}
               className="px-2 py-1 text-sm rounded cursor-pointer"
               style={{
@@ -68,14 +96,17 @@ export default function MobileToc({ headings }: MobileTocProps) {
             <ul className="space-y-1">
               {headings.map((heading) => (
                 <li key={heading.slug}>
-                  <button
-                    onClick={() => handleLinkClick(heading.slug)}
-                    className="block w-full text-left py-2 px-3 rounded text-sm transition-colors cursor-pointer hover:bg-[var(--color-terminal-surface)]"
+                  <a
+                    href={`#${heading.slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLinkClick(heading.slug);
+                    }}
+                    className="block py-2 px-3 rounded text-sm transition-colors hover:bg-[var(--color-terminal-surface)]"
                     style={{ color: 'var(--color-terminal-text-dim)' }}
-                    type="button"
                   >
                     {heading.text}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
