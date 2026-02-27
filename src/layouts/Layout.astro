@@ -7,6 +7,9 @@ interface Props {
 }
 
 const { title, description, ogImage, canonicalUrl } = Astro.props;
+const siteUrl = Astro.site?.origin || 'https://clawd.patriciomarroquin.dev';
+const resolvedCanonical = canonicalUrl || siteUrl;
+const resolvedOgImage = ogImage || `${siteUrl}/og-image.svg`;
 ---
 
 <!doctype html>
@@ -22,10 +25,10 @@ const { title, description, ogImage, canonicalUrl } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />
+    <meta property="og:url" content={resolvedCanonical} />
     <meta
       property="og:image"
-      content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'}
+      content={resolvedOgImage}
     />
     <meta property="og:site_name" content="clawd" />
 
@@ -35,11 +38,11 @@ const { title, description, ogImage, canonicalUrl } = Astro.props;
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content={ogImage || 'https://clawd.patriciomarroquin.dev/og-image.svg'}
+      content={resolvedOgImage}
     />
 
     <!-- Canonical & Theme -->
-    <link rel="canonical" href={canonicalUrl || 'https://clawd.patriciomarroquin.dev'} />
+    <link rel="canonical" href={resolvedCanonical} />
     <meta name="theme-color" content="#0a0a0a" />
   </head>
   <body class="font-mono text-terminal-text min-h-screen">
