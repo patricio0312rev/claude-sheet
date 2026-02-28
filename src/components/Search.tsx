@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { isInputFocused } from '../utils/dom';
 
 export default function Search() {
   const [query, setQuery] = useState('');
@@ -69,14 +70,8 @@ export default function Search() {
   }, []);
 
   return (
-    <div className="relative mb-8">
-      <div
-        className="flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm transition-all duration-200"
-        style={{
-          backgroundColor: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-        }}
-      >
+    <div className="relative w-full sm:max-w-xs">
+      <div className="flex items-center gap-2 px-3 py-2 text-sm border-b border-text transition-all duration-200">
         <svg
           width="16"
           height="16"
@@ -86,7 +81,7 @@ export default function Search() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={{ color: 'var(--color-text-muted)', flexShrink: 0 }}
+          className="text-text-muted shrink-0"
         >
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -98,33 +93,20 @@ export default function Search() {
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search cheat sheet sections"
           placeholder="Search commands, shortcuts..."
-          className="flex-1 bg-transparent outline-none text-sm"
-          style={{ color: 'var(--color-text)' }}
+          className="flex-1 bg-transparent outline-none text-sm text-text"
           spellCheck={false}
           autoComplete="off"
         />
         {matchCount !== null ? (
-          <span className="text-xs tabular-nums" style={{ color: 'var(--color-text-muted)' }}>
+          <span className="text-xs tabular-nums text-text-muted">
             {matchCount} match{matchCount !== 1 ? 'es' : ''}
           </span>
         ) : (
-          <kbd
-            className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[0.625rem] rounded"
-            style={{
-              backgroundColor: 'var(--color-surface-elevated)',
-              color: 'var(--color-text-muted)',
-              border: '1px solid var(--color-border)',
-            }}
-          >
+          <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[0.625rem] rounded font-mono bg-surface text-text-muted">
             /
           </kbd>
         )}
       </div>
     </div>
   );
-}
-
-function isInputFocused(): boolean {
-  const tag = document.activeElement?.tagName.toLowerCase();
-  return tag === 'input' || tag === 'textarea' || tag === 'select';
 }
