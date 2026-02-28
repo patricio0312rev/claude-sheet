@@ -125,12 +125,17 @@ export default function SearchModal() {
   // Navigate to section
   const goTo = useCallback((slug: string) => {
     close();
-    const el = document.getElementById(slug);
-    if (el) {
-      setTimeout(() => {
-        const top = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-      }, 100);
+    const isSheet = document.documentElement.getAttribute('data-view-mode') === 'sheet';
+    if (isSheet) {
+      window.dispatchEvent(new CustomEvent('sheet-zoom-section', { detail: slug }));
+    } else {
+      const el = document.getElementById(slug);
+      if (el) {
+        setTimeout(() => {
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        }, 100);
+      }
     }
   }, [close]);
 
