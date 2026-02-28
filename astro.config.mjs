@@ -7,5 +7,8 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['nonextinct-overrichly-trisha.ngrok-free.dev'],
+    },
   },
 });
