@@ -11,9 +11,18 @@ interface MobileTocProps {
 
 export default function MobileToc({ headings }: MobileTocProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSheetMode, setIsSheetMode] = useState(false);
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Listen for sheet mode changes
+  useEffect(() => {
+    setIsSheetMode(document.documentElement.getAttribute('data-view-mode') === 'sheet');
+    const handler = () => setIsSheetMode(document.documentElement.getAttribute('data-view-mode') === 'sheet');
+    window.addEventListener('view-mode-changed', handler);
+    return () => window.removeEventListener('view-mode-changed', handler);
+  }, []);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -68,6 +77,8 @@ export default function MobileToc({ headings }: MobileTocProps) {
       }, 100);
     }
   };
+
+  if (isSheetMode) return null;
 
   return (
     <>
