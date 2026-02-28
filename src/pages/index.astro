@@ -12,6 +12,7 @@ import ClaudeIcon from '../components/ClaudeIcon';
 import ThemeToggle from '../components/ThemeToggle';
 import Toast from '../components/Toast';
 import StickyHeader from '../components/StickyHeader';
+import SheetMode from '../components/SheetMode';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
@@ -48,6 +49,25 @@ const tocHeadings = headings
             </svg>
             <span class="flex-1 text-left text-sm">Search commands, shortcuts...</span>
             <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[0.625rem] font-mono bg-surface text-text-muted">/</kbd>
+          </button>
+          <button
+            id="header-view-toggle"
+            type="button"
+            class="flex items-center justify-center w-8 h-8 text-text-muted hover:text-text transition-colors cursor-pointer"
+            title="Toggle sheet mode"
+            aria-label="Toggle sheet mode"
+          >
+            <svg id="header-view-icon-grid" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+            </svg>
+            <svg id="header-view-icon-list" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" style="display:none">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
           </button>
           <ThemeToggle client:load />
         </div>
@@ -91,6 +111,7 @@ const tocHeadings = headings
       <ScrollSpy client:load />
     </div>
 
+    <SheetMode client:load />
     <MobileToc headings={tocHeadings} client:load />
     <Toast client:load />
     <StickyHeader client:load />
@@ -100,6 +121,47 @@ const tocHeadings = headings
       document.getElementById('header-search-trigger')?.addEventListener('click', function() {
         window.dispatchEvent(new Event('open-search'));
       });
+
+      (function() {
+        function updateViewIcons(isSheet) {
+          var gridIcons = document.querySelectorAll('[id$="view-icon-grid"]');
+          var listIcons = document.querySelectorAll('[id$="view-icon-list"]');
+          gridIcons.forEach(function(el) { el.style.display = isSheet ? 'none' : 'block'; });
+          listIcons.forEach(function(el) { el.style.display = isSheet ? 'block' : 'none'; });
+        }
+
+        function toggleViewMode() {
+          var html = document.documentElement;
+          var isSheet = html.getAttribute('data-view-mode') === 'sheet';
+          if (isSheet) {
+            html.removeAttribute('data-view-mode');
+            localStorage.setItem('viewMode', 'doc');
+            window.dispatchEvent(new CustomEvent('view-mode-changed', { detail: 'doc' }));
+          } else {
+            html.setAttribute('data-view-mode', 'sheet');
+            localStorage.setItem('viewMode', 'sheet');
+            window.dispatchEvent(new CustomEvent('view-mode-changed', { detail: 'sheet' }));
+          }
+          updateViewIcons(!isSheet);
+        }
+
+        // Initialize icon state
+        updateViewIcons(document.documentElement.getAttribute('data-view-mode') === 'sheet');
+
+        // Bind all view toggle buttons
+        document.querySelectorAll('[id$="view-toggle"]').forEach(function(btn) {
+          btn.addEventListener('click', toggleViewMode);
+        });
+
+        // Re-bind when sticky header creates new buttons
+        window.addEventListener('view-toggle-mounted', function() {
+          document.querySelectorAll('[id$="view-toggle"]').forEach(function(btn) {
+            btn.removeEventListener('click', toggleViewMode);
+            btn.addEventListener('click', toggleViewMode);
+          });
+          updateViewIcons(document.documentElement.getAttribute('data-view-mode') === 'sheet');
+        });
+      })();
     </script>
 
     <footer class="border-t-[3px] border-text py-8 mt-12 flex items-center justify-between">
