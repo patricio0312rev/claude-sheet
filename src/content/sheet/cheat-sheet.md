@@ -11,35 +11,41 @@
 | `Esc Esc`   | Open rewind menu (go back in conversation or code) |
 | `Ctrl+C`    | Cancel current operation (hard stop)               |
 | `Ctrl+D`    | Exit Claude Code                                   |
-| `Shift+Tab` | Cycle modes: Normal → Auto-Accept → Plan           |
+| `Shift+Tab` | Cycle modes: Normal → acceptEdits → Plan            |
+| `?`         | Show available keyboard shortcuts                  |
 
 ### Navigation
 
-| Key                | Action                                    |
-| ------------------ | ----------------------------------------- |
-| `Ctrl+R`           | Search command history                    |
-| `Ctrl+T`           | Toggle task list                          |
-| `Ctrl+O`           | Toggle verbose transcript                 |
-| `Ctrl+G`           | Open external editor (write long prompts) |
-| `Ctrl+V`           | Paste image (screenshots, diagrams)       |
-| `Ctrl+S`           | Stash current prompt (save for later)     |
-| `Cmd+P` / `Meta+P` | Open model picker (switch models quick)   |
-| `Cmd+T` / `Meta+T` | Toggle extended thinking                  |
+| Key                  | Action                                    |
+| -------------------- | ----------------------------------------- |
+| `Ctrl+R`             | Search command history                    |
+| `Ctrl+T`             | Toggle task list                          |
+| `Ctrl+O`             | Toggle verbose transcript                 |
+| `Ctrl+G`             | Open external editor (write long prompts) |
+| `Ctrl+V`             | Paste image (screenshots, diagrams)       |
+| `Alt+P` / `Option+P` | Switch model                              |
+| `Alt+T` / `Option+T` | Toggle extended thinking                  |
+| `Alt+M`              | Toggle permission modes                   |
 
 ### Editing (Bash-style)
 
-| Key                 | Action                     |
-| ------------------- | -------------------------- |
-| `Ctrl+A` / `Ctrl+E` | Start / end of line        |
-| `Opt+F` / `Opt+B`   | Word forward / back        |
-| `Ctrl+W`            | Delete previous word       |
-| `\` + `Enter`       | New line (without sending) |
+| Key                 | Action                                   |
+| ------------------- | ---------------------------------------- |
+| `Ctrl+A` / `Ctrl+E` | Start / end of line                      |
+| `Opt+F` / `Opt+B`   | Word forward / back                      |
+| `Ctrl+W`            | Delete previous word                     |
+| `Ctrl+K`            | Delete to end of line                    |
+| `Ctrl+U`            | Delete entire line                       |
+| `Ctrl+Y`            | Paste deleted text (`Alt+Y` to cycle)    |
+| `Ctrl+J`            | Newline (control sequence alternative)   |
+| `\` + `Enter`       | New line (without sending)               |
 
 ### Background Tasks
 
-| Key      | Action                          |
-| -------- | ------------------------------- |
-| `Ctrl+B` | Send running task to background |
+| Key      | Action                                           |
+| -------- | ------------------------------------------------ |
+| `Ctrl+B` | Send running task to background                  |
+| `Ctrl+F` | Kill all background agents (press twice confirm) |
 
 > **Tip:** Run `/terminal-setup` to enable Shift+Enter for multi-line input in iTerm2 & VS Code. Run `/keybindings` to customize all shortcuts.
 
@@ -49,15 +55,19 @@
 
 ### Session Control
 
-| Command           | Action                                                           |
-| ----------------- | ---------------------------------------------------------------- |
-| `/clear`          | Reset conversation history (fresh start)                         |
-| `/compact [hint]` | Compress context to save tokens. Optional hint for what to keep. |
-| `/rewind`         | Go back in conversation AND/OR code changes                      |
-| `/export [file]`  | Export conversation to file or clipboard                         |
-| `/cost`           | Show session cost & token usage                                  |
-| `/usage`          | Show plan usage & rate limits                                    |
-| `/context`        | Token consumption visualization                                  |
+| Command              | Action                                                           |
+| -------------------- | ---------------------------------------------------------------- |
+| `/clear`             | Reset conversation history (fresh start)                         |
+| `/compact [hint]`    | Compress context to save tokens. Optional hint for what to keep. |
+| `/rewind`            | Go back in conversation AND/OR code changes                      |
+| `/export [file]`     | Export conversation to file or clipboard                         |
+| `/copy`              | Copy last response to clipboard                                  |
+| `/cost`              | Show session cost & token usage                                  |
+| `/usage`             | Show plan usage & rate limits                                    |
+| `/context`           | Token consumption visualization                                  |
+| `/stats`             | Visualize daily usage and streaks                                |
+| `/rename [name]`     | Rename current session                                           |
+| `/resume [session]`  | Resume conversation by ID or name                                |
 
 ### Configuration
 
@@ -69,27 +79,34 @@
 | `/keybindings`    | Open keyboard shortcuts config file    |
 | `/vim`            | Toggle vim mode for input              |
 | `/terminal-setup` | Setup Shift+Enter for multi-line input |
+| `/theme`          | Change color theme                     |
+| `/status`         | Open Settings (Status tab)             |
+| `/statusline`     | Set up status line UI                  |
+| `/hooks`          | Open interactive hooks manager         |
 
 ### Development
 
-| Command   | Action                                                 |
-| --------- | ------------------------------------------------------ |
-| `/init`   | Create CLAUDE.md for your project — **do this first!** |
-| `/memory` | View & edit CLAUDE.md project memory                   |
-| `/review` | Code review analysis                                   |
-| `/doctor` | Environment diagnostics & health check                 |
-| `/agents` | Manage sub-agents                                      |
-| `/mcp`    | Manage MCP servers                                     |
+| Command               | Action                                                 |
+| --------------------- | ------------------------------------------------------ |
+| `/init`               | Create CLAUDE.md for your project — **do this first!** |
+| `/memory`             | View & edit CLAUDE.md project memory                   |
+| `/review`             | Code review analysis                                   |
+| `/doctor`             | Environment diagnostics & health check                 |
+| `/agents`             | Manage sub-agents                                      |
+| `/mcp`                | Manage MCP servers                                     |
+| `/plan`               | Enter plan mode from prompt                            |
+| `/debug [description]` | Troubleshoot current session                           |
+| `/add-dir`            | Add working directory during session                   |
+| `/todos`              | List current TODO items                                |
 
 ### Advanced
 
 | Command               | Action                               |
 | --------------------- | ------------------------------------ |
-| `/insights`           | Generate HTML usage report            |
-| `/pr_comments`        | View GitHub PR feedback              |
 | `/install-github-app` | Setup automated PR reviews           |
 | `/tasks`              | Persistent task list management      |
 | `/teleport`           | Transfer session between web ↔ local |
+| `/desktop`            | Hand off CLI session to Desktop app  |
 
 ---
 
@@ -108,22 +125,42 @@
 
 ### Model & Behavior
 
-| Flag                     | Action                   |
-| ------------------------ | ------------------------ |
-| `--model sonnet`         | Use Sonnet (fast, cheap) |
-| `--model opus`           | Use Opus (smartest)      |
-| `--agent my-agent`       | Use a specific sub-agent |
-| `--permission-mode plan` | Start in plan mode       |
-| `--max-turns N`          | Limit conversation turns |
-| `--max-budget-usd N`     | Set max spend limit      |
+| Flag                     | Action                            |
+| ------------------------ | --------------------------------- |
+| `--model sonnet`         | Use Sonnet (fast, cheap)          |
+| `--model opus`           | Use Opus (smartest)               |
+| `--fallback-model`       | Automatic fallback model          |
+| `--agent my-agent`       | Use a specific sub-agent          |
+| `--permission-mode plan` | Start in plan mode                |
+| `--max-turns N`          | Limit conversation turns          |
+| `--max-budget-usd N`     | Set max spend limit               |
+| `--teammate-mode`        | Agent team display mode           |
 
 ### Context & Directories
 
-| Flag                | Action                           |
-| ------------------- | -------------------------------- |
-| `--add-dir ../path` | Add extra directories to context |
-| `--chrome`          | Enable browser integration       |
-| `--verbose`         | Show detailed logging            |
+| Flag                  | Action                           |
+| --------------------- | -------------------------------- |
+| `--add-dir ../path`   | Add extra directories to context |
+| `--chrome`            | Enable browser integration       |
+| `--no-chrome`         | Disable Chrome integration       |
+| `--ide`               | Auto-connect to IDE              |
+| `--verbose`           | Show detailed logging            |
+
+### Session Management
+
+| Flag                | Action                                  |
+| ------------------- | --------------------------------------- |
+| `--session-id`      | Use specific session UUID               |
+| `--fork-session`    | New session ID when resuming            |
+| `--from-pr`         | Resume sessions linked to GitHub PR     |
+
+### System Prompt
+
+| Flag                      | Action                          |
+| ------------------------- | ------------------------------- |
+| `--system-prompt`         | Custom system prompt            |
+| `--system-prompt-file`    | System prompt from file         |
+| `--append-system-prompt`  | Append to default system prompt |
 
 ### Permissions
 
@@ -133,13 +170,26 @@
 | `--disallowedTools`   | Block specific tools         |
 | `--tools "Bash,Edit"` | Restrict to only these tools |
 
+### Configuration
+
+| Flag                       | Action                            |
+| -------------------------- | --------------------------------- |
+| `--init` / `--init-only`   | Run initialization hooks          |
+| `--maintenance`            | Run maintenance hooks             |
+| `--strict-mcp-config`     | Only use specified MCP servers    |
+| `--disable-slash-commands` | Disable all skills                |
+| `--setting-sources`        | Comma-separated setting sources   |
+| `--settings`               | Path to settings JSON             |
+
 ### Output Formats (for -p mode)
 
-| Flag                          | Action                   |
-| ----------------------------- | ------------------------ |
-| `--output-format text`        | Plain text (default)     |
-| `--output-format json`        | Structured JSON          |
-| `--output-format stream-json` | Real-time streaming JSON |
+| Flag                          | Action                              |
+| ----------------------------- | ----------------------------------- |
+| `--output-format text`        | Plain text (default)                |
+| `--output-format json`        | Structured JSON                     |
+| `--output-format stream-json` | Real-time streaming JSON            |
+| `--json-schema`               | Validated JSON output matching schema |
+| `--input-format`              | Input format for print mode         |
 
 > **Tip:** Pipe data in! `git diff | claude -p "review this"` or `cat error.log | claude -p "explain"`
 
@@ -205,30 +255,63 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 
 ## Permission Modes
 
-| Mode            | Description                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------- |
-| **Normal**      | Claude asks permission for every tool use (read, write, bash, etc.)                                     |
-| **Auto-Accept** | Claude runs tools WITHOUT asking. Faster but less control. Good for trusted tasks.                      |
-| **Plan Mode**   | Claude ONLY reads & plans. Won't write or run anything. Review first, then switch to Normal to execute. |
+| Mode                  | Description                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Normal**            | Claude asks permission for every tool use (read, write, bash, etc.)                                     |
+| **acceptEdits**       | Claude runs tools WITHOUT asking. Faster but less control. Good for trusted tasks.                      |
+| **Plan Mode**         | Claude ONLY reads & plans. Won't write or run anything. Review first, then switch to Normal to execute. |
+| **dontAsk**           | Auto-denies permissions unless pre-approved in settings.                                                |
+| **bypassPermissions** | Skips all permission prompts. Requires safe/sandboxed environment.                                      |
 
-**Cycle:** `Shift+Tab` → Normal → Auto-Accept → Plan → Normal...
+**Cycle:** `Shift+Tab` → Normal → acceptEdits → Plan → Normal...
 
-> **Best workflow:** Start in Plan Mode to explore & understand the problem. Review Claude's plan. Switch to Normal/Auto-Accept to implement.
+### Permission Rule Syntax
+
+| Pattern                  | Description                                          |
+| ------------------------ | ---------------------------------------------------- |
+| `Tool(specifier)`        | Allow a specific tool with a specifier               |
+| `Bash(git:*)`            | Allow all git commands                               |
+| `Bash(npm:*)`            | Allow all npm commands                               |
+| `Edit(**/src/**)`        | Allow edits in src directory                         |
+| Wildcards (`*`)          | Match any value within a specifier                   |
+| Evaluation order         | deny → ask → allow (deny wins over allow)            |
+
+> **Best workflow:** Start in Plan Mode to explore & understand the problem. Review Claude's plan. Switch to Normal/acceptEdits to implement.
 
 ---
 
 ## Hooks — Event Automation
 
-| Hook               | Description                                                 |
-| ------------------ | ----------------------------------------------------------- |
-| `PreToolUse`       | Runs BEFORE Claude uses a tool — validate, block, or modify |
-| `PostToolUse`      | Runs AFTER a tool — check results, auto-format, lint        |
-| `UserPromptSubmit` | Before your message is processed                            |
-| `Stop`             | When Claude finishes its response                           |
-| `SessionStart`     | When a session begins                                       |
-| `SessionEnd`       | When a session ends                                         |
-| `PreCompact`       | Before context compression                                  |
-| `Notification`     | When Claude sends a notification                            |
+### Hook Events
+
+| Hook                 | Description                                                 |
+| -------------------- | ----------------------------------------------------------- |
+| `PreToolUse`         | Runs BEFORE Claude uses a tool — validate, block, or modify |
+| `PostToolUse`        | Runs AFTER a tool — check results, auto-format, lint        |
+| `PostToolUseFailure` | After a tool call fails                                     |
+| `UserPromptSubmit`   | Before your message is processed                            |
+| `PermissionRequest`  | When permission dialog appears                              |
+| `Stop`               | When Claude finishes its response                           |
+| `SessionStart`       | When a session begins                                       |
+| `SessionEnd`         | When a session ends                                         |
+| `PreCompact`         | Before context compression                                  |
+| `Notification`       | When Claude sends a notification                            |
+| `SubagentStart`      | When a subagent starts                                      |
+| `SubagentStop`       | When a subagent stops                                       |
+| `TeammateIdle`       | Agent team teammate about to go idle                        |
+| `TaskCompleted`      | When a task is marked as completed                          |
+| `ConfigChange`       | Config file changes during session                          |
+| `WorktreeCreate`     | When a worktree is created                                  |
+| `WorktreeRemove`     | When a worktree is removed                                  |
+
+### Handler Types
+
+| Type      | Description                                      |
+| --------- | ------------------------------------------------ |
+| `command` | Run a shell command                              |
+| `http`    | POST to an HTTP endpoint                         |
+| `prompt`  | Single-turn Claude evaluation                    |
+| `agent`   | Subagent with tools for verification             |
 
 > **Example:** Auto-run `prettier` after every file edit, or block writes to `.env` files. Configure in your settings JSON.
 
