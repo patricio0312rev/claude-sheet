@@ -157,7 +157,8 @@ export default function StickyHeader() {
         createElement('button', {
           onClick: focusSearch,
           type: 'button',
-          title: 'Search',
+          className: 'tooltip',
+          'data-tooltip': 'Search',
           style: {
             display: 'flex',
             alignItems: 'center',
@@ -175,7 +176,8 @@ export default function StickyHeader() {
         createElement('button', {
           onClick: toggleViewMode,
           type: 'button',
-          title: isSheetMode ? 'Switch to doc mode' : 'Switch to sheet mode',
+          className: 'tooltip',
+          'data-tooltip': isSheetMode ? 'Switch to doc mode' : 'Switch to sheet mode',
           'aria-label': isSheetMode ? 'Switch to doc mode' : 'Switch to sheet mode',
           style: {
             display: 'flex',
@@ -196,7 +198,8 @@ export default function StickyHeader() {
         createElement('button', {
           onClick: toggleTheme,
           type: 'button',
-          title: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+          className: 'tooltip',
+          'data-tooltip': isDark ? 'Light mode' : 'Dark mode',
           'aria-label': isDark ? 'Switch to light mode' : 'Switch to dark mode',
           style: {
             display: 'flex',
