@@ -57,10 +57,21 @@ export default function SheetMode() {
       const detail = (e as CustomEvent).detail;
       setIsSheet(detail === 'sheet');
     };
+    const zoomHandler = (e: Event) => {
+      const slug = (e as CustomEvent).detail;
+      const idx = buildSheetSections().findIndex((s) => s.slug === slug);
+      if (idx !== -1) {
+        setSections((prev) => prev.length ? prev : buildSheetSections());
+        setZoomedIndex(idx);
+      }
+    };
+
     window.addEventListener('view-mode-changed', handler);
+    window.addEventListener('sheet-zoom-section', zoomHandler);
     return () => {
       clearTimeout(timer);
       window.removeEventListener('view-mode-changed', handler);
+      window.removeEventListener('sheet-zoom-section', zoomHandler);
     };
   }, []);
 
