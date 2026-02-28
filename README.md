@@ -2,7 +2,7 @@
 
 <img src="public/favicon.svg" alt="clawd logo" width="80" height="80" />
 
-# clawd
+# Claude Code Cheat Sheet
 
 **The complete Claude Code cheat sheet — commands, shortcuts, features & tips in one place.**
 
