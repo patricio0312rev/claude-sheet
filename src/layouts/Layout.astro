@@ -25,6 +25,12 @@ const resolvedOgImage = ogImage || `${siteUrl}/og-image.png`;
         if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
       })();
     </script>
+    <script is:inline>
+      (function() {
+        var v = localStorage.getItem('viewMode');
+        if (v === 'sheet') document.documentElement.setAttribute('data-view-mode', 'sheet');
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
