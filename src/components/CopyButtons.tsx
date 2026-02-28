@@ -4,7 +4,7 @@ import CopyButton from './CopyButton';
 
 export default function CopyButtons() {
   useEffect(() => {
-    const preElements = document.querySelectorAll('.prose-terminal pre');
+    const preElements = document.querySelectorAll('.prose pre');
     const roots: ReturnType<typeof createRoot>[] = [];
 
     preElements.forEach((pre) => {
