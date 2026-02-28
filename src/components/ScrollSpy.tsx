@@ -35,21 +35,20 @@ export default function ScrollSpy() {
       }
     );
 
-    headings.forEach((heading) => {
-      // Only observe visible headings (not filtered by search)
-      if (heading.style.display !== 'none') {
-        observer.observe(heading);
-      }
-    });
-
-    // Re-observe when search filtering changes visibility
-    const mutationObserver = new MutationObserver(() => {
-      observer.disconnect();
+    const observeHeadings = () => {
       headings.forEach((heading) => {
         if (heading.style.display !== 'none') {
           observer.observe(heading);
         }
       });
+    };
+
+    observeHeadings();
+
+    // Re-observe when search filtering changes visibility
+    const mutationObserver = new MutationObserver(() => {
+      observer.disconnect();
+      observeHeadings();
     });
 
     const content = document.getElementById('sheet-content');
@@ -61,9 +60,25 @@ export default function ScrollSpy() {
       });
     }
 
+    // Disconnect observers in sheet mode
+    const handleModeChange = () => {
+      const isSheet = document.documentElement.getAttribute('data-view-mode') === 'sheet';
+      if (isSheet) {
+        observer.disconnect();
+        mutationObserver.disconnect();
+      } else {
+        observeHeadings();
+        if (content) {
+          mutationObserver.observe(content, { attributes: true, subtree: true, attributeFilter: ['style'] });
+        }
+      }
+    };
+    window.addEventListener('view-mode-changed', handleModeChange);
+
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
+      window.removeEventListener('view-mode-changed', handleModeChange);
     };
   }, []);
 
