@@ -1,14 +1,6 @@
-# Claude Code Cheat Sheet
+> **Full docs:** [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code/overview) — complete documentation index
 
-_Everything you need in one place — Commands, Shortcuts, Features & Tips_
-
-`2026 EDITION`
-
-> 📖 **Full docs:** [code.claude.com/docs/llms.txt](https://code.claude.com/docs/llms.txt) — complete documentation index
-
----
-
-## ⌨️ Keyboard Shortcuts
+## Keyboard Shortcuts
 
 ### Essential
 
@@ -49,11 +41,11 @@ _Everything you need in one place — Commands, Shortcuts, Features & Tips_
 | -------- | ------------------------------- |
 | `Ctrl+B` | Send running task to background |
 
-> 💡 **Tip:** Run `/terminal-setup` to enable Shift+Enter for multi-line input in iTerm2 & VS Code. Run `/keybindings` to customize all shortcuts.
+> **Tip:** Run `/terminal-setup` to enable Shift+Enter for multi-line input in iTerm2 & VS Code. Run `/keybindings` to customize all shortcuts.
 
 ---
 
-## ⚡ Slash Commands
+## Slash Commands
 
 ### Session Control
 
@@ -93,7 +85,7 @@ _Everything you need in one place — Commands, Shortcuts, Features & Tips_
 
 | Command               | Action                               |
 | --------------------- | ------------------------------------ |
-| `/insights`           | Generate HTML usage report 🆕        |
+| `/insights`           | Generate HTML usage report            |
 | `/pr_comments`        | View GitHub PR feedback              |
 | `/install-github-app` | Setup automated PR reviews           |
 | `/tasks`              | Persistent task list management      |
@@ -101,7 +93,7 @@ _Everything you need in one place — Commands, Shortcuts, Features & Tips_
 
 ---
 
-## 🚀 CLI Launch Flags
+## CLI Launch Flags
 
 ### Starting Sessions
 
@@ -149,11 +141,11 @@ _Everything you need in one place — Commands, Shortcuts, Features & Tips_
 | `--output-format json`        | Structured JSON          |
 | `--output-format stream-json` | Real-time streaming JSON |
 
-> 💡 **Tip:** Pipe data in! `git diff | claude -p "review this"` or `cat error.log | claude -p "explain"`
+> **Tip:** Pipe data in! `git diff | claude -p "review this"` or `cat error.log | claude -p "explain"`
 
 ---
 
-## 🧩 The Big 5 — Claude Code Extension System
+## The Big 5 — Claude Code Extension System
 
 ### 1. CLAUDE.md — Project Memory
 
@@ -211,7 +203,7 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 
 ---
 
-## 🔄 Permission Modes
+## Permission Modes
 
 | Mode            | Description                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------- |
@@ -221,11 +213,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 
 **Cycle:** `Shift+Tab` → Normal → Auto-Accept → Plan → Normal...
 
-> 💡 **Best workflow:** Start in Plan Mode to explore & understand the problem. Review Claude's plan. Switch to Normal/Auto-Accept to implement.
+> **Best workflow:** Start in Plan Mode to explore & understand the problem. Review Claude's plan. Switch to Normal/Auto-Accept to implement.
 
 ---
 
-## 🪝 Hooks — Event Automation
+## Hooks — Event Automation
 
 | Hook               | Description                                                 |
 | ------------------ | ----------------------------------------------------------- |
@@ -238,11 +230,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 | `PreCompact`       | Before context compression                                  |
 | `Notification`     | When Claude sends a notification                            |
 
-> 💡 **Example:** Auto-run `prettier` after every file edit, or block writes to `.env` files. Configure in your settings JSON.
+> **Example:** Auto-run `prettier` after every file edit, or block writes to `.env` files. Configure in your settings JSON.
 
 ---
 
-## ✨ Input Superpowers
+## Input Superpowers
 
 | Feature      | Description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
@@ -253,11 +245,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 | Multi-dir    | `claude --add-dir ../api ../web` — work across multiple projects       |
 | Worktrees    | `claude -w feature` — isolated git branch + Claude session             |
 
-> ⚠️ **Pro tip:** Use `@` references instead of copy-pasting file contents. It's smarter with context and uses fewer tokens.
+> **Pro tip:** Use `@` references instead of copy-pasting file contents. It's smarter with context and uses fewer tokens.
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Settings Priority (highest → lowest)
 
@@ -277,11 +269,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 | `claude config set key value` | Change a value    |
 | `claude config add key value` | Add to array      |
 
-> 💡 **Permissions example:** Allow git commands without asking: add `"Bash(git:*)"` to your allowedTools in settings.
+> **Permissions example:** Allow git commands without asking: add `"Bash(git:*)"` to your allowedTools in settings.
 
 ---
 
-## 📁 File Structure Map
+## File Structure Map
 
 ### Project Level (.claude/)
 
@@ -306,7 +298,7 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 
 ---
 
-## ⏪ Rewind & Checkpoints
+## Rewind & Checkpoints
 
 | Key/Command | Action                    |
 | ----------- | ------------------------- |
@@ -321,11 +313,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 | **Code**         | Restore files only. Conversation stays.        |
 | **Full Rewind**  | Restore both conversation AND code to a point. |
 
-> ⚠️ **Note:** Bash side-effects (database changes, API calls, deleted files via `rm`) can't be rewound. Checkpoints only track file edits by Claude. Use Git for permanent safety.
+> **Note:** Bash side-effects (database changes, API calls, deleted files via `rm`) can't be rewound. Checkpoints only track file edits by Claude. Use Git for permanent safety.
 
 ---
 
-## 🎯 Pro Workflow — How to Get the Best Out of Claude Code
+## Pro Workflow — How to Get the Best Out of Claude Code
 
 ### Starting a New Project
 
@@ -360,11 +352,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 | Worktrees     | `claude -w feature-auth` — isolated branch + session       |
 | Multiple dirs | `--add-dir ../api ../web` — work across repos              |
 | Background    | Ctrl+B sends a task to background so you can start another |
-| Agent Teams   | Multiple Claude instances collaborating (experimental) 🆕  |
+| Agent Teams   | Multiple Claude instances collaborating (experimental)     |
 
 ---
 
-## 🛠️ Create Custom Commands
+## Create Custom Commands
 
 | Step            | Action                                             |
 | --------------- | -------------------------------------------------- |
@@ -385,11 +377,11 @@ Custom Commands → **YOU** invoke them **vs** Skills → **CLAUDE** invokes the
 
 Use `$ARGUMENTS` in your markdown — it gets replaced with whatever you type after the command.
 
-> 💡 **Example:** `/project:review src/auth.ts` → `$ARGUMENTS` = "src/auth.ts"
+> **Example:** `/project:review src/auth.ts` → `$ARGUMENTS` = "src/auth.ts"
 
 ---
 
-## 📡 Remote Control — Continue Sessions From Any Device
+## Remote Control — Continue Sessions From Any Device
 
 Control your local Claude Code session from your phone, tablet, or any browser. Your session runs locally — the remote device is just a window into it.
 
@@ -448,11 +440,11 @@ Control your local Claude Code session from your phone, tablet, or any browser. 
 | Terminal must stay open | Closing the terminal or stopping `claude` ends the session                         |
 | Network timeout         | ~10 min without network → session times out (restart with `claude remote-control`) |
 
-> 💡 **Tip:** Use `/rename` before `/remote-control` to give the session a descriptive name — makes it easy to find across devices. Use `/mobile` to get the Claude app download QR code.
+> **Tip:** Use `/rename` before `/remote-control` to give the session a descriptive name — makes it easy to find across devices. Use `/mobile` to get the Claude app download QR code.
 
 ---
 
-## 📋 Quick Reference — Most Used Combos
+## Quick Reference — Most Used Combos
 
 ### Daily Essentials
 
