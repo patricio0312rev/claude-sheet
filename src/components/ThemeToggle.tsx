@@ -42,10 +42,10 @@ export default function ThemeToggle() {
     {
       onClick: toggleTheme,
       className:
-        'w-8 h-8 flex items-center justify-center text-text-muted hover:text-text transition-colors cursor-pointer',
+        'w-8 h-8 flex items-center justify-center text-text-muted hover:text-text transition-colors cursor-pointer tooltip',
       type: 'button',
       'aria-label': isDark ? 'Switch to light mode' : 'Switch to dark mode',
-      title: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+      'data-tooltip': isDark ? 'Light mode' : 'Dark mode',
     },
     isDark
       ? createElement(Sun, { size: 18, strokeWidth: 2 })
