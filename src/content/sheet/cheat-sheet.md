@@ -103,6 +103,8 @@
 
 | Command               | Action                               |
 | --------------------- | ------------------------------------ |
+| `/insights`           | Generate HTML usage report           |
+| `/pr_comments`        | View GitHub PR feedback              |
 | `/install-github-app` | Setup automated PR reviews           |
 | `/tasks`              | Persistent task list management      |
 | `/teleport`           | Transfer session between web ↔ local |
