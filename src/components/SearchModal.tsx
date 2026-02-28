@@ -157,6 +157,19 @@ export default function SearchModal() {
     };
   }, [open]);
 
+  // Close on Escape (document-level for reliability when input is focused)
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isOpen, close]);
+
   // Modal keyboard nav
   const handleModalKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -210,6 +223,7 @@ export default function SearchModal() {
         animation: 'search-backdrop-in 0.2s ease',
       },
       'aria-hidden': 'true',
+      onClick: close,
     }),
 
     // Modal
