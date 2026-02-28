@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clawd.patriciomarroquin.dev/sitemap-index.xml
