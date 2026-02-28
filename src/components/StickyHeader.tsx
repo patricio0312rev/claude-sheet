@@ -1,12 +1,14 @@
 import { useEffect, useState, useCallback, createElement } from 'react';
-import { Sun, Moon, Search } from 'lucide-react';
+import { Sun, Moon, Search, LayoutGrid, LayoutList } from 'lucide-react';
 
 export default function StickyHeader() {
   const [visible, setVisible] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isSheetMode, setIsSheetMode] = useState(false);
 
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains('dark'));
+    setIsSheetMode(document.documentElement.getAttribute('data-view-mode') === 'sheet');
 
     const header = document.querySelector('header');
     if (!header) return;
@@ -23,7 +25,14 @@ export default function StickyHeader() {
     });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-    return () => { observer.disconnect(); mo.disconnect(); };
+    // Listen for view mode changes
+    const handleModeChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setIsSheetMode(detail === 'sheet');
+    };
+    window.addEventListener('view-mode-changed', handleModeChange);
+
+    return () => { observer.disconnect(); mo.disconnect(); window.removeEventListener('view-mode-changed', handleModeChange); };
   }, []);
 
   const scrollToTop = useCallback(() => {
@@ -43,6 +52,20 @@ export default function StickyHeader() {
     setIsDark(next);
     setTimeout(() => html.classList.remove('transitioning'), 350);
   }, []);
+
+  const toggleViewMode = useCallback(() => {
+    const html = document.documentElement;
+    const next = !isSheetMode;
+    if (next) {
+      html.setAttribute('data-view-mode', 'sheet');
+      localStorage.setItem('viewMode', 'sheet');
+    } else {
+      html.removeAttribute('data-view-mode');
+      localStorage.setItem('viewMode', 'doc');
+    }
+    setIsSheetMode(next);
+    window.dispatchEvent(new CustomEvent('view-mode-changed', { detail: next ? 'sheet' : 'doc' }));
+  }, [isSheetMode]);
 
   return createElement('div', {
     style: {
@@ -127,7 +150,7 @@ export default function StickyHeader() {
         ),
       ),
 
-      // Right: search button + theme toggle
+      // Right: search button + view toggle + theme toggle
       createElement('div', {
         style: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
       },
@@ -148,6 +171,27 @@ export default function StickyHeader() {
           },
         },
           createElement(Search, { size: 16, strokeWidth: 2 }),
+        ),
+        createElement('button', {
+          onClick: toggleViewMode,
+          type: 'button',
+          title: isSheetMode ? 'Switch to doc mode' : 'Switch to sheet mode',
+          'aria-label': isSheetMode ? 'Switch to doc mode' : 'Switch to sheet mode',
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '2rem',
+            height: '2rem',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: 'var(--color-text-muted)',
+          },
+        },
+          isSheetMode
+            ? createElement(LayoutList, { size: 16, strokeWidth: 2 })
+            : createElement(LayoutGrid, { size: 16, strokeWidth: 2 }),
         ),
         createElement('button', {
           onClick: toggleTheme,
