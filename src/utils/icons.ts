@@ -24,7 +24,7 @@ export const SECTION_ICONS: Record<string, LucideIcon> = {
   'permission-modes': LockKeyhole,
   'hooks--event-automation': Webhook,
   'input-superpowers': Zap,
-  'configuration-1': SlidersHorizontal,
+  'configuration-2': SlidersHorizontal,
   'file-structure-map': Network,
   'rewind--checkpoints': RotateCcw,
   'pro-workflow--how-to-get-the-best-out-of-claude-code': Crosshair,
