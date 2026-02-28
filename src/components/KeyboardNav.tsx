@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { isInputFocused } from '../utils/dom';
 
 export default function KeyboardNav() {
   const [visible, setVisible] = useState(true);
@@ -49,57 +50,25 @@ export default function KeyboardNav() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-lg text-xs backdrop-blur-md z-50"
-      style={{
-        backgroundColor: 'rgba(13, 20, 32, 0.85)',
-        border: '1px solid var(--color-border)',
-        color: 'var(--color-text-muted)',
-        opacity: fading ? 0 : 1,
-        transition: 'opacity 1s ease',
-      }}
+      className="fixed bottom-4 right-4 hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded text-xs z-50 bg-text text-surface transition-opacity duration-1000"
+      style={{ opacity: fading ? 0 : 1 }}
     >
       <span className="flex items-center gap-1">
-        <kbd
-          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
-          style={{
-            backgroundColor: 'var(--color-surface-elevated)',
-            color: 'var(--color-accent)',
-            border: '1px solid var(--color-border)',
-          }}
-        >
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono bg-white/[0.15]">
           j
         </kbd>
-        <kbd
-          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
-          style={{
-            backgroundColor: 'var(--color-surface-elevated)',
-            color: 'var(--color-accent)',
-            border: '1px solid var(--color-border)',
-          }}
-        >
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono bg-white/[0.15]">
           k
         </kbd>
         <span className="ml-0.5">navigate</span>
       </span>
-      <span style={{ color: 'var(--color-border-bright)' }}>·</span>
+      <span className="opacity-40">·</span>
       <span className="flex items-center gap-1">
-        <kbd
-          className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono"
-          style={{
-            backgroundColor: 'var(--color-surface-elevated)',
-            color: 'var(--color-accent)',
-            border: '1px solid var(--color-border)',
-          }}
-        >
+        <kbd className="inline-flex items-center justify-center w-5 h-5 rounded text-[0.625rem] font-mono bg-white/[0.15]">
           /
         </kbd>
         <span className="ml-0.5">search</span>
       </span>
     </div>
   );
-}
-
-function isInputFocused(): boolean {
-  const tag = document.activeElement?.tagName.toLowerCase();
-  return tag === 'input' || tag === 'textarea' || tag === 'select';
 }
