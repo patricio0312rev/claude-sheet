@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface TocHeading {
   slug: string;
@@ -11,7 +11,13 @@ interface MobileTocProps {
 
 export default function MobileToc({ headings }: MobileTocProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -20,34 +26,55 @@ export default function MobileToc({ headings }: MobileTocProps) {
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false);
+      if (e.key === 'Escape') {
+        handleClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
+      triggerButtonRef.current?.focus();
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleLinkClick = (slug: string) => {
-    setIsOpen(false);
+    handleClose();
     const el = document.getElementById(slug);
     if (el) {
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      setTimeout(() => {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }, 100);
     }
   };
 
   return (
     <>
       <button
+        ref={triggerButtonRef}
         onClick={() => setIsOpen(true)}
-        className="lg:hidden fixed bottom-5 right-5 z-40 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer backdrop-blur-md"
-        style={{
-          backgroundColor: 'rgba(13, 20, 32, 0.85)',
-          border: '1px solid var(--color-border)',
-          color: 'var(--color-accent)',
-        }}
+        className="lg:hidden fixed bottom-5 right-5 z-40 flex items-center gap-2 px-4 py-2.5 text-sm font-medium cursor-pointer bg-accent text-bg shadow-lg shadow-accent/20"
         type="button"
         aria-label="Open table of contents"
       >
@@ -70,27 +97,20 @@ export default function MobileToc({ headings }: MobileTocProps) {
 
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-50 flex flex-col"
-          style={{ backgroundColor: 'var(--color-bg)' }}
+          ref={dialogRef}
+          className="lg:hidden fixed inset-0 z-50 flex flex-col bg-bg text-text"
           role="dialog"
           aria-modal="true"
           aria-label="Table of contents"
         >
-          <div
-            className="flex items-center justify-between px-5 py-4 border-b"
-            style={{ borderColor: 'var(--color-border)' }}
-          >
-            <h2 className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
-              On this page
+          <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+            <h2 className="font-heading text-lg font-bold text-text">
+              Contents
             </h2>
             <button
               ref={closeButtonRef}
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer"
-              style={{
-                color: 'var(--color-text-muted)',
-                backgroundColor: 'var(--color-surface)',
-              }}
+              onClick={handleClose}
+              className="flex items-center justify-center w-8 h-8 rounded cursor-pointer text-text-muted bg-surface"
               type="button"
               aria-label="Close table of contents"
             >
@@ -119,16 +139,7 @@ export default function MobileToc({ headings }: MobileTocProps) {
                       e.preventDefault();
                       handleLinkClick(heading.slug);
                     }}
-                    className="block py-2.5 px-4 rounded-lg text-sm transition-colors cursor-pointer"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--color-surface)';
-                      e.currentTarget.style.color = 'var(--color-text)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
-                    }}
+                    className="block py-2 px-3 rounded text-sm text-text-secondary transition-colors cursor-pointer hover:bg-surface hover:text-text"
                   >
                     {heading.text}
                   </a>
