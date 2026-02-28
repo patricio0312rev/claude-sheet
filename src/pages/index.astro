@@ -5,7 +5,13 @@ import CopyButtons from '../components/CopyButtons';
 import KeyboardNav from '../components/KeyboardNav';
 import ScrollSpy from '../components/ScrollSpy';
 import MobileToc from '../components/MobileToc';
-import Search from '../components/Search';
+import SearchModal from '../components/SearchModal';
+import HeadingIcons from '../components/HeadingIcons';
+import CopyCommands from '../components/CopyCommands';
+import ClaudeIcon from '../components/ClaudeIcon';
+import ThemeToggle from '../components/ThemeToggle';
+import Toast from '../components/Toast';
+import StickyHeader from '../components/StickyHeader';
 
 const entry = await getEntry('sheet', 'cheat-sheet');
 if (!entry) throw new Error('Cheat sheet content not found');
@@ -19,51 +25,42 @@ const tocHeadings = headings
   title="clawd — Claude Code Cheat Sheet"
   description="Everything you need in one place — Commands, Shortcuts, Features & Tips for Claude Code"
 >
-  <!-- Ambient background glow -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    <div
-      class="absolute -top-[40%] -left-[20%] w-[60%] h-[60%] rounded-full bg-accent/[0.03] blur-[120px]"
-    >
-    </div>
-    <div
-      class="absolute -bottom-[30%] -right-[10%] w-[50%] h-[50%] rounded-full bg-amber/[0.02] blur-[100px]"
-    >
-    </div>
-  </div>
-
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <header class="pt-12 sm:pt-16 pb-8">
-      <div class="flex items-center gap-3 mb-6">
-        <div
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-text-muted"
-        >
-          <span class="w-2 h-2 rounded-full bg-green animate-pulse"></span>
-          v2026
+    <header class="pt-12 sm:pt-20 pb-8 border-b-[3px] border-text mb-10 animate-in">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-2">
+        <div>
+          <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl text-text font-extrabold leading-[0.95] tracking-tighter flex items-center gap-3">
+            <ClaudeIcon size={48} className="text-accent shrink-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14" />
+            Claude Code
+          </h1>
+          <p class="font-mono text-[0.6875rem] text-text-muted tracking-[0.25em] uppercase mt-2">The Complete Cheat Sheet</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            id="header-search-trigger"
+            type="button"
+            class="flex items-center gap-2 px-3 py-2 text-sm border-b border-text text-text-muted hover:text-text transition-colors cursor-pointer w-full sm:max-w-xs"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <span class="flex-1 text-left text-sm">Search commands, shortcuts...</span>
+            <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[0.625rem] font-mono bg-surface text-text-muted">/</kbd>
+          </button>
+          <ThemeToggle client:load />
         </div>
       </div>
-      <h1
-        class="font-heading text-3xl sm:text-5xl font-bold text-text tracking-tight leading-[1.1]"
-      >
-        Claude Code<br />
-        <span class="text-accent">Cheat Sheet</span>
-      </h1>
-      <p class="text-text-secondary mt-4 text-base sm:text-lg max-w-xl leading-relaxed">
-        Commands, shortcuts, features & tips — everything you need in one place.
-      </p>
     </header>
 
-    <Search client:load />
-
     <!-- Main content area with sidebar -->
-    <div class="lg:grid lg:grid-cols-[220px_1fr] lg:gap-12 pb-12">
+    <div class="lg:grid lg:grid-cols-[220px_1fr] lg:gap-12 pb-12 animate-in" style="animation-delay: 80ms">
       <!-- TOC Sidebar -->
       <aside id="toc-sidebar" class="hidden lg:block">
         <nav class="sticky top-8">
-          <h2 class="text-[0.6875rem] uppercase tracking-[0.15em] text-text-muted mb-4 font-medium">
-            On this page
-          </h2>
-          <ul class="space-y-0.5 text-[0.8125rem]">
+          <p class="font-mono text-[0.5625rem] text-text-muted tracking-[0.2em] uppercase mb-3 pl-3">Contents</p>
+          <ul class="space-y-0 text-[0.8125rem] border-l border-border">
             {
               headings
                 .filter((h) => h.depth === 2)
@@ -71,7 +68,7 @@ const tocHeadings = headings
                   <li>
                     <a
                       href={`#${heading.slug}`}
-                      class="block py-1.5 px-3 rounded-md text-text-muted hover:text-text hover:bg-surface transition-all duration-150 truncate cursor-pointer"
+                      class="block py-1.5 px-3 -ml-px border-l-2 border-transparent text-text-muted hover:text-text hover:border-border-bright transition-all duration-150 truncate cursor-pointer toc-link"
                       data-toc-link
                     >
                       {heading.text}
@@ -87,28 +84,30 @@ const tocHeadings = headings
       <main id="sheet-content" class="prose min-w-0">
         <Content />
       </main>
+      <HeadingIcons client:load />
       <CopyButtons client:load />
+      <CopyCommands client:load />
       <KeyboardNav client:load />
       <ScrollSpy client:load />
     </div>
 
     <MobileToc headings={tocHeadings} client:load />
+    <Toast client:load />
+    <StickyHeader client:load />
+    <SearchModal client:load />
 
-    <!-- Footer -->
-    <footer class="border-t border-border py-8 text-center">
-      <p class="text-sm text-text-muted">
-        Built with
-        <a
-          href="https://astro.build"
-          class="text-text-secondary hover:text-accent transition-colors cursor-pointer">Astro</a
-        >
-        <span class="mx-1.5 text-border-bright">·</span>
-        Source on
-        <a
-          href="https://github.com/patricio0312rev/claude-sheet"
-          class="text-text-secondary hover:text-accent transition-colors cursor-pointer">GitHub</a
-        >
-      </p>
+    <script is:inline>
+      document.getElementById('header-search-trigger')?.addEventListener('click', function() {
+        window.dispatchEvent(new Event('open-search'));
+      });
+    </script>
+
+    <footer class="border-t-[3px] border-text py-8 mt-12 flex items-center justify-between">
+      <p class="font-mono text-[0.6875rem] text-text-muted">Made with 💜 by <a href="https://github.com/patricio0312rev" class="text-text-secondary hover:text-accent transition-colors">@patricio0312rev</a></p>
+      <a
+        href="https://github.com/patricio0312rev/claude-sheet"
+        class="font-mono text-[0.6875rem] text-text-muted hover:text-accent transition-colors"
+      >GitHub &rarr;</a>
     </footer>
   </div>
 </Layout>
