@@ -401,3 +401,91 @@ html.transitioning *::after {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ===== Sheet Mode ===== */
+
+/* Hide content/sidebar when in sheet mode */
+html[data-view-mode="sheet"] #sheet-content,
+html[data-view-mode="sheet"] #toc-sidebar {
+  display: none !important;
+}
+
+/* Hide sheet grid when in doc mode (default) */
+#sheet-grid {
+  display: none;
+}
+
+html[data-view-mode="sheet"] #sheet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  html[data-view-mode="sheet"] #sheet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  html[data-view-mode="sheet"] #sheet-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card color palette */
+.sheet-card-border-0 { border-left-color: var(--color-accent); }
+.sheet-card-border-1 { border-left-color: var(--color-green); }
+.sheet-card-border-2 { border-left-color: #3B82F6; }
+.sheet-card-border-3 { border-left-color: #F59E0B; }
+.sheet-card-border-4 { border-left-color: #8B5CF6; }
+.sheet-card-border-5 { border-left-color: #14B8A6; }
+.sheet-card-border-6 { border-left-color: #EC4899; }
+.sheet-card-border-7 { border-left-color: #6366F1; }
+
+/* Card preview fade-out gradient */
+.sheet-card-preview {
+  position: relative;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.sheet-card-preview::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--color-surface));
+  pointer-events: none;
+}
+
+/* Sheet zoom modal animations */
+@keyframes sheet-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sheet-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes sheet-modal-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+}
